@@ -7,7 +7,7 @@ import re # 正则表达式
 
 from 视频下载 import web
 from 视频下载 import main
-
+from 视频下载 import 加密
 
 class APP:
     # 魔术方法
@@ -27,7 +27,7 @@ class APP:
         self.v = tk.IntVar()
 
         # 默认为1
-        self.v.set(2)
+        self.v.set(1)
 
         # Frame空间
         frame_1 = tk.Frame(self.root)
@@ -40,6 +40,7 @@ class APP:
         bb = tk.Label(frame_1, text='版本: 1.0  qq:153242015', padx=10, pady=10)
         group = tk.Label(frame_2, text='暂时只有一个视频通道：', padx=10, pady=10)
         tb  = tk.Radiobutton(frame_3, text='一号通道', variable=self.v, value=1, width=10, height=3)
+        tb1 = tk.Radiobutton(frame_3, text='二号通道', variable=self.v, value=2, width=10, height=3)
         lable = tk.Label(frame_5, text='请输入视频连接：')
 
 
@@ -64,6 +65,7 @@ class APP:
         bb.grid(row=0, column=0)
         group.grid(row=0, column=0)
         tb.grid(row=0, column=1)
+        tb1.grid(row=0, column=2)
         lable.grid(row=0, column=0)
         entry.grid(row=0, column=1)
 
@@ -75,8 +77,10 @@ class APP:
 
 
     def video_play(self):
+
         # 视频解析网站地址
-        port = 'https://jx.618g.com/?url='
+        port = 加密.jm_(self.v.get())
+
         # 正则表达式判定是否为合法连接
         if re.match(r'^https?:/{2}\w.+$', self.url.get()):
             # 拿到用户输入的视频网址
@@ -84,13 +88,14 @@ class APP:
             # 视频连接解密
             ips = parse.quote_plus(ip)
             # 用浏览器打开网址
-            webbrowser.open(port + ips)
+            webbrowser.open(port+ips)
         else:
             msgbox.showerror(title='错误', message='视频链接地址无效，请重新输入！')
 
     def video_down(self):
         # 视频解析网站地址
-        port = 'https://jx.618g.com/?url='
+        port = 加密.jm_(self.v.get())
+
         # 正则表达式判定是否为合法连接
         if re.match(r'^https?:/{2}\w.+$', self.url.get()):
 
@@ -98,7 +103,7 @@ class APP:
             ip = self.url.get()
             # 视频连接解密
             ips = parse.quote_plus(ip)
-            xy = main.main_(port + ips)
+            xy = main.main_(port+ips)
             if xy == 'successful':
                 msgbox.showerror(title='下载成功', message='下载成功！！！继续或关闭')
             else:

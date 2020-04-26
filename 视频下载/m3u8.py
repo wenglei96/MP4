@@ -13,6 +13,11 @@ def m3u8_(url):
 
     # 加密视频播放地址信息解析,获取 m3u8 地址信息
     s = BeautifulSoup(re.content, 'html.parser')
+    #视频名称
+    titles = s.find('title').text
+    t = titles.split(' ')
+    title = t[0]+'_'+t[1]
+    print('视频名称',title)
     src = s.find('div',class_='player').find('iframe')
     #print(src)
     m3u8 =src.get('src')
@@ -41,9 +46,9 @@ def m3u8_(url):
     m3u8s = requests.get(url_m3u8_hls)
 
     # 这个文件有用，先保存一下
-    # file_m3u8s = url_m3u8_hls.split('/')[-1]
-    # with open(file_m3u8s,'wb') as f:
-    #     f.write(m3u8s.content)
+    file_m3u8s = url_m3u8_hls.split('/')[-1]
+    with open(file_m3u8s,'wb') as f:
+        f.write(m3u8s.content)
 
     #获取 .ts数据
     # iter_lines得到的是bytesstring
@@ -64,7 +69,8 @@ def m3u8_(url):
 
     m3u8_ss ={
         'm3u8_hls':pt[0:-7],
-        'gs':len(ts_name)
+        'gs':len(ts_name),
+        'title':title
     }
     return  m3u8_ss
 
