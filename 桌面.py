@@ -5,9 +5,10 @@ import tkinter as tk # 做桌面编程的
 import webbrowser # 控制浏览器的
 import re # 正则表达式
 
-from 视频下载 import web
-from 视频下载 import main
-from 视频下载 import 加密
+import web
+import main
+import 加密
+
 
 class APP:
     # 魔术方法
@@ -37,10 +38,12 @@ class APP:
         frame_5 = tk.Frame(self.root)
 
         # 控件内容设置
-        bb = tk.Label(frame_1, text='版本: 1.0  qq:153242015', padx=10, pady=10)
-        group = tk.Label(frame_2, text='暂时只有一个视频通道：', padx=10, pady=10)
+        bb = tk.Label(frame_1, text='版本: 1.0      技术支持qq:153242015', padx=10, pady=10)
+        group = tk.Label(frame_2, text='暂时下载只有一号通道：  （支持所有视频解析播放，请勿进行商业行为）', padx=10, pady=10)
         tb  = tk.Radiobutton(frame_3, text='一号通道', variable=self.v, value=1, width=10, height=3)
         tb1 = tk.Radiobutton(frame_3, text='二号通道', variable=self.v, value=2, width=10, height=3)
+        tb2 = tk.Radiobutton(frame_3, text='三号通道', variable=self.v, value=3, width=10, height=3)
+        tb3 = tk.Radiobutton(frame_3, text='四号通道', variable=self.v, value=4, width=10, height=3)
         lable = tk.Label(frame_5, text='请输入视频连接：')
 
 
@@ -66,6 +69,8 @@ class APP:
         group.grid(row=0, column=0)
         tb.grid(row=0, column=1)
         tb1.grid(row=0, column=2)
+        tb2.grid(row=0, column=3)
+        tb3.grid(row=0, column=4)
         lable.grid(row=0, column=0)
         entry.grid(row=0, column=1)
 
@@ -76,8 +81,8 @@ class APP:
         TV2.grid(row=0, column=4, ipadx=30, ipady=10)
 
 
+    #视频播放
     def video_play(self):
-
         # 视频解析网站地址
         port = 加密.jm_(self.v.get())
 
@@ -92,18 +97,20 @@ class APP:
         else:
             msgbox.showerror(title='错误', message='视频链接地址无效，请重新输入！')
 
+
+    #视频下载
     def video_down(self):
         # 视频解析网站地址
-        port = 加密.jm_(self.v.get())
-
+        # 现阶段只做了第一个视频下载
+        #port = 加密.jm_(self.v.get())
+        port = 加密.jm_(1)
         # 正则表达式判定是否为合法连接
         if re.match(r'^https?:/{2}\w.+$', self.url.get()):
-
             # 拿到用户输入的视频网址
             ip = self.url.get()
             # 视频连接解密
             ips = parse.quote_plus(ip)
-            xy = main.main_(port+ips)
+            xy = main.main_(port + ips)
             if xy == 'successful':
                 msgbox.showerror(title='下载成功', message='下载成功！！！继续或关闭')
             else:

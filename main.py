@@ -2,9 +2,10 @@ import requests
 import os
 import time
 from multiprocessing import Pool
-from 视频下载 import m3u8
-from 视频下载 import delete
-from 视频下载 import dirbc
+import m3u8
+import delete
+import dirbc
+
 
 def run(i,m3u8_hls,dirs):
     ##  拼接 .ts 文件

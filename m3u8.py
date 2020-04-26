@@ -16,7 +16,9 @@ def m3u8_(url):
     #视频名称
     titles = s.find('title').text
     t = titles.split(' ')
-    title = t[0]+'_'+t[1]
+    title = ''
+    for aa in t:
+        title += aa
     print('视频名称',title)
     src = s.find('div',class_='player').find('iframe')
     #print(src)
