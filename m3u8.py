@@ -3,6 +3,8 @@ import os
 import requests
 from bs4 import  BeautifulSoup
 
+# 用于m3u8数据解析
+
 def m3u8_(url):
     #url ='https://jx.618g.com/?url=https://v.qq.com/x/cover/gfmdwy050xqp85e.html'
     headers = {

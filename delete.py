@@ -1,7 +1,7 @@
 import os
 
 
-
+# 最后删除
 # 删除下载的 .ts文件
 def del_files(dir):
   path = dir
