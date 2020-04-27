@@ -5,7 +5,7 @@ import multiprocessing
 from multiprocessing import Pool
 import m3u8
 import delete
-
+import 桌面
 
 
 ##https://v.qq.com/x/cover/m441e3rjq9kwpsc.html
@@ -39,9 +39,9 @@ def main_(m3u8_url,dirss):
     multiprocessing.freeze_support()  # 在Windows下编译需要加这行
     m3u8s = m3u8.m3u8_(m3u8_url)
     # 创建进程池，执行10个任务
-    pool = Pool(1)
+    pool = Pool(32)
     for i in range(m3u8s['gs']):
-        pool.apply_async(run(i,m3u8s,dirss)) #执行任务
+        pool.apply_async(run,(i,m3u8s,dirss)) #执行任务
     #调用合并
     a ='copy /b '+dirss+'*.ts '+dirss+m3u8s['title'] +'.mp4'
     #merge(5,"copy /b F:\\PyDownload\\*.ts F:\\PyDownload\\new.mp4")
@@ -50,6 +50,11 @@ def main_(m3u8_url,dirss):
     delete.del_files(dirss)
     print('ok！处理完成')
     return 'successful'
+
+
+
+
+
 
 
 # if __name__ == '__main__':

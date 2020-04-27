@@ -112,7 +112,7 @@ class APP:
             print('视频路径', ip)
             # 视频连接解密
             ips = parse.quote_plus(ip)
-            xy = main.main_(port + ips,dirss)
+            xy =main.main_(port + ips,dirss)
             if xy == 'successful':
                 msgbox.showerror(title='下载成功', message='下载成功！！！继续或关闭')
             else:
@@ -126,7 +126,6 @@ class APP:
     def loop(self):
         self.root.resizable(True, True)
         self.root.mainloop()
-
 
 if __name__ == "__main__":
     app = APP()
