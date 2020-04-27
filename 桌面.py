@@ -8,7 +8,7 @@ import re # 正则表达式
 import web
 import main
 import 加密
-
+import dirbc
 
 class APP:
     # 魔术方法
@@ -85,11 +85,11 @@ class APP:
     def video_play(self):
         # 视频解析网站地址
         port = 加密.jm_(self.v.get())
-
         # 正则表达式判定是否为合法连接
         if re.match(r'^https?:/{2}\w.+$', self.url.get()):
             # 拿到用户输入的视频网址
             ip = self.url.get()
+            print('视频路径', ip)
             # 视频连接解密
             ips = parse.quote_plus(ip)
             # 用浏览器打开网址
@@ -106,11 +106,13 @@ class APP:
         port = 加密.jm_(1)
         # 正则表达式判定是否为合法连接
         if re.match(r'^https?:/{2}\w.+$', self.url.get()):
+            dirss=dirbc.dir()
             # 拿到用户输入的视频网址
             ip = self.url.get()
+            print('视频路径', ip)
             # 视频连接解密
             ips = parse.quote_plus(ip)
-            xy = main.main_(port + ips)
+            xy = main.main_(port + ips,dirss)
             if xy == 'successful':
                 msgbox.showerror(title='下载成功', message='下载成功！！！继续或关闭')
             else:

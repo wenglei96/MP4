@@ -70,7 +70,7 @@ def m3u8_(url):
     print('.ts文件个数',len(ts_name))
 
     m3u8_ss ={
-        'm3u8_hls':pt[0:-7],
+        'm3u8_hls':pt,
         'gs':len(ts_name),
         'title':title
     }
