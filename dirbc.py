@@ -24,14 +24,13 @@ def dir():
         dirs = dir.split('/')
         for aa in dirs:
             a += aa + '\\'
-        return a
         print('保存文件夹路径', a)
+        return a
     else:
         #判断桌面路径是否存在，存在直接返回，不存在则创建
         if not os.path.exists('C:\\Users\\Administrator\\Desktop\\视频'):
             os.makedirs('C:\\Users\\Administrator\\Desktop\\视频')
-            return 'C:\\Users\\Administrator\\Desktop\\视频\\'
-        else:
-            return 'C:\\Users\\Administrator\\Desktop\\视频\\'
+        print('保存文件夹路径', 'C:\\Users\\Administrator\\Desktop\\视频\\')
+        return 'C:\\Users\\Administrator\\Desktop\\视频\\'
 
 
